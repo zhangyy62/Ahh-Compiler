@@ -1,2 +1,2 @@
 # Ahh-Compiler
-A simple compiler by using javascript
+A simple compiler in javascript
