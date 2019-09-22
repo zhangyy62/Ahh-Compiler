@@ -1,0 +1,29 @@
+{
+    "exclude": [
+        "node_modules"
+    ],
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "module": "commonJS",
+        "target": "es6",
+        "isolatedModules": true,
+        "typeRoots": [
+            "./types",
+            "./node_modules/@types"
+        ],
+        "types": [
+            "node"
+        ],
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise",
+            "es6"
+        ],
+        "sourceMap": true,
+        "pretty": true,
+        "moduleResolution": "node",
+        "baseUrl": "src"
+    }
+}
