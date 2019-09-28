@@ -2,14 +2,13 @@ import TokenStruct from "base/tokenStruct";
 
 class Parser {
 
-    parser(tokens: TokenStruct[]​​) {
+    parser(tokens: TokenStruct[]) {
         let current = 0;
 
         function walk() {
             let token = tokens[current];
 
             if (token.type === 'NUMBER') {
-
                 current++;
 
                 return {
@@ -19,11 +18,10 @@ class Parser {
             }
 
             if (token.type === 'PUNCTUATOR') {
-
                 current++;
 
                 return {
-                    type: 'NAMELiteral',
+                    type: 'PUNCTUATORLiteral',
                     value: token.value,
                 };
             }
@@ -33,7 +31,7 @@ class Parser {
                 current++;
 
                 return {
-                    type: 'ADDLiteral',
+                    type: 'IDENTIFIERLiteral',
                     value: token.value,
                 };
             }

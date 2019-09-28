@@ -7,7 +7,7 @@ import Parser from '../src/lib/parser';
 
 describe('token test',
     () => {
-        it('tokenizer test', () => {
+        it.skip('tokenizer test', () => {
             let input = fs.readFileSync(path.resolve('tests/code.ahh'), 'utf8');
             let tokenizer = new Tokenizer(input);
             let tokens = tokenizer.parse();
@@ -15,12 +15,11 @@ describe('token test',
             // expect(true).to.equal(false);
         });
 
-        it.skip('parsing test', () => {
+        it('parsing test', () => {
             let input = fs.readFileSync(path.resolve('tests/code.ahh'), 'utf8');
             let tokenizer = new Tokenizer(input);
             let tokens = tokenizer.parse();
             let parser = new Parser();
-            console.log(tokens);
             let res = parser.parser(tokens);
             console.log(res);
             // expect(true).to.equal(false);
