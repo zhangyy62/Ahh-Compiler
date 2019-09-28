@@ -1,11 +1,12 @@
 import TokenStruct from "../base/tokenStruct";
 
 const SYMBOL_TABLE: { [key: string]: string } = {
-    '(': 'LEFT_PAREN',
-    ')': 'RIGHT_PAREN',
-    'if': 'KEYWORD_IF',
-    ';': 'KEYWORD_SEMI',
-    '=': 'KEYWORD_EQUAL',
+    '(': 'PAREN',
+    ')': 'PAREN',
+    ';': 'PUNCTUATOR',
+    '=': 'PUNCTUATOR',
+    '+': 'PUNCTUATOR',
+    'var': 'DECLARATION',
 };
 
 class Tokenizer {
@@ -16,10 +17,10 @@ class Tokenizer {
         this._token = token;
     }
 
-    parse() {
+    parse(): TokenStruct[] {
         let tokens = [];
         if (!this._token) {
-            return false;
+            return [];
         }
         while (this._index < this._token.length) {
             let char = this._token[this._index];
@@ -45,7 +46,7 @@ class Tokenizer {
                     char = this._token[++this._index];
                 }
 
-                tokens.push(new TokenStruct('TYPE_NUMBER', value));
+                tokens.push(new TokenStruct('NUMBER', value));
 
                 continue;
             }
@@ -62,7 +63,7 @@ class Tokenizer {
 
                 char = this._token[++this._index];
 
-                tokens.push(new TokenStruct('TYPE_STRING', value));
+                tokens.push(new TokenStruct('STRING', value));
 
                 continue;
             }
@@ -75,9 +76,11 @@ class Tokenizer {
                     value += char;
                     char = this._token[++this._index];
                 }
-
-                tokens.push(new TokenStruct('TYPE_NAME', value));
-
+                if (SYMBOL_TABLE[value]) {
+                    tokens.push(new TokenStruct(SYMBOL_TABLE[value], value));
+                } else {
+                    tokens.push(new TokenStruct('IDENTIFIER', value));
+                }
                 continue;
             }
 
